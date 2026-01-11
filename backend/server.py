@@ -12,8 +12,6 @@ from datetime import datetime, timezone, timedelta
 import random
 import sqlite3
 import pandas as pd
-from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, avg, sum as spark_sum, count, when
 import threading
 import time
 
@@ -28,12 +26,8 @@ db = client[os.environ['DB_NAME']]
 # SQLite setup
 DB_PATH = ROOT_DIR / 'banking_data.db'
 
-# Initialize Spark
-spark = SparkSession.builder \
-    .appName("BankingAnalytics") \
-    .config("spark.driver.memory", "2g") \
-    .config("spark.executor.memory", "2g") \
-    .getOrCreate()
+# Spark is available but not initialized at startup (requires Java)
+spark = None
 
 # Create the main app without a prefix
 app = FastAPI()
