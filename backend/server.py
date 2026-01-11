@@ -347,12 +347,8 @@ async def get_customer_analytics():
 async def get_risk_assessment():
     conn = sqlite3.connect(str(DB_PATH))
     
-    # Use PySpark for risk calculation
-    df = spark.read.format('jdbc').options(
-        url=f'jdbc:sqlite:{DB_PATH}',
-        dbtable='customers',
-        driver='org.sqlite.JDBC'
-    ).load() if False else None  # Simplified for demo
+    # PySpark integration available but uses SQL for demo
+    # In production, this would use Spark for large-scale processing
     
     cursor = conn.cursor()
     cursor.execute('''
